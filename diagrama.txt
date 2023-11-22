@@ -1,0 +1,58 @@
+main
+  - Comprobar numero argumentos
+  - Inicializar estructuras
+    + init( t_game &game )
+  - Comprobar que el mapa cumple las restricciones y guardarlo
+    + get_map( char *file, t_game *game )
+
+init
+  - init_player_data( t_game *game )
+  - init_textures_data( t_game *game )
+  - init_mlx_data( t_game *game )
+
+get_map
+    - Comprobar extension del archivo --> check_extension
+    - Leer el archivo y guardar su contenido -> read_file
+    - Comprobar que el mapa no tiene saltos de linea -> check_complete_map
+    - Dividir el contenido del archivo -> ft_split
+    - Recoger el indice del mapa. -> get_map_index
+    - Comprobar los requisitos del mapa -> check_map
+
+check_map
+    - Comprobar linea a linea los caracteres que forman el mapa.
+    - Si el caracter es la posicion del jugador, comprueba si ya ha encontrado
+      anteriormente otra posicion, y si no guarda los valores del jugador. -> check_player
+    - Si el caracter es 0 comprueba que este rodeado por mas suelo o por muros o el personaje -> check_floor
+    - Si el caracter no es un espacio o un 1 muestra error
+    - Si al final del bucle no ha encontrado un personaje muestra error
+
+check_floor.c
+  - check_cross
+  - check_corners
+
+
+check_map.c
+  - 
+  - void  check_extension( char *file, char *extension, t_game *game )
+
+
+  - Primero comprobamos que la extension del archivo sea '.cub'
+  - Despues leemos el contenido del archivo y lo almacenamos en un string
+  - Comprobar que el mapa no termine en salto de linea ni que contenga saltos de linea entre lineas
+  - Ahora dividimos el contenido del archivo por saltos de linea.
+  - Comprobar que existe una sola posicion para el jugador y que su direccion sea la correcta.
+    + Aprovechamos para dar valor a las variables del jugador.
+  - Comprobar que el mapa esta cerrado por muros y solo contiene los caracteres permitidos
+  
+  - Dividir la linea de la textura por palabras
+  - Si la linea no contiene ninguna textura pasamos a la siguiente linea
+  - Comprobamos que sea una textura valida
+  - Añadimos la textura siempre y cuando el formato halla sido el adecuado:
+    + Si al dividir por palabras tiene una longitud de mayor de 4 solo puede ser una textura rgb
+    + Si la longitud es de 2 puede ser cualquier textura
+      - Dividir los valores del rgb por ','
+      - Pasar el numero a entero
+      - Comprobar que solo hay 3 numeros y que estos estan entre el 0 y el 255
+      - Devolver el color de la textura en hexadecimal.
+    + Si la longitud es 3 solo puede ser rgb tambien
+      - 
